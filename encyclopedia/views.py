@@ -1,3 +1,4 @@
+from turtle import title
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 import markdown2
@@ -20,7 +21,9 @@ def load_page(request,title):
         })
         return HttpResponse(content_html)
     else:
-        return render(request,"encyclopedia/error_404.html")
+        return render(request,"encyclopedia/error_404.html",{
+            "error_message":"Page Does Not Exist"
+        })
 
 def search(request):
     entry = request.GET.get("q")
@@ -35,3 +38,20 @@ def search(request):
     return render(request,"encyclopedia/substring_results.html",{
         "matched":matched
     })
+
+def create(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        content=request.POST.get("content")
+        if title and content:
+            check = util.get_entry(title)
+            if check:
+                util.save_entry(title,content)
+                return render(request,"encyclopedia/error_404.html",{
+                    "error_message":"Entry With Title Already Exist, old entry replaced"
+                })
+            util.save_entry(title,content)
+            return HttpResponseRedirect(reverse("encyclopedia:load_page",args=(title,)))
+      
+        return HttpResponse("error")
+    return render(request,"encyclopedia/newpage.html")
