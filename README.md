@@ -13,4 +13,4 @@ _Markup Language is taken and stored and upon request of the page, it is convert
 database.Entries submitted are saved as files in the "entries" directory which lives in the "encyclopedia" app of this django project
 
 
-[index page][/assets/images/img.png]
+[index page][assets/images/img.png]
