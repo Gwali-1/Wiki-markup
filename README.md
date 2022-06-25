@@ -1,6 +1,6 @@
 # Wiki-markup
 
-assets/img.png
+assets/images/img.png
 
 _A encyclopedia like application like wikipedia that allows you to add entries or articles with just markup language._
 _Markup Language is taken and stored and upon request of the page, it is converted to equivalent html and displayed._
