@@ -4,6 +4,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 import markdown2
 from django.urls import reverse
 from . import util
+import random
 
 
 
@@ -23,7 +24,6 @@ def load_page(request,title):
             "content":content_html,
             "title":title
         })
-        return HttpResponse(content_html)
     else:
         return render(request,"encyclopedia/error_404.html",{
             "error_message":"Page Does Not Exist"
@@ -79,3 +79,14 @@ def edit(request,title):
     return render(request,"encyclopedia/editpage.html",{
         "content":content
     })
+
+
+
+def randomPick(request):
+    entries = util.list_entries()
+    if entries:
+        lucky_21 = random.choice(entries)
+        return HttpResponseRedirect(reverse("encyclopedia:load_page",args=(lucky_21,)))
+
+    return render(request,"encyclopedia/error_404.html",{
+                    "error_message":"Thew are no current entries at the moment"})
