@@ -1,6 +1,5 @@
 # Wiki-markup
 
-/assets/images/img.png
 
 _A encyclopedia like application like wikipedia that allows you to add entries or articles with just markup language._
 _Markup Language is taken and stored and upon request of the page, it is converted to equivalent html and displayed._
@@ -12,3 +11,6 @@ _Markup Language is taken and stored and upon request of the page, it is convert
 
 *This is a simple implementation of the logic of taking in markup as input and providing html synthax to be diplayed in browser.This is no leveraging of a 
 database.Entries submitted are saved as files in the "entries" directory which lives in the "encyclopedia" app of this django project
+
+
+/assets/images/img.png
