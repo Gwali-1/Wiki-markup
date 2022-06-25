@@ -1,0 +1,11 @@
+{% extends 'encyclopedia/layout.html' %}
+
+{% block title %}
+results
+{% endblock title %}
+
+{% block body %}
+{%for match in matched%}
+<li><a href = "{% url 'encyclopedia:load_page' match %}">{{match}}</a></li>
+{% endfor %}
+{% endblock body %}

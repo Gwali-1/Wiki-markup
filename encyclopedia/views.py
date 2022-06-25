@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 import markdown2
-
+from django.urls import reverse
 from . import util
 
 
@@ -22,4 +22,16 @@ def load_page(request,title):
     else:
         return render(request,"encyclopedia/error_404.html")
 
-
+def search(request):
+    entry = request.GET.get("q")
+    content = util.get_entry(entry)
+    if content:
+        return HttpResponseRedirect(reverse("encyclopedia:load_page",args=(entry,)))
+    entries = util.list_entries()
+    matched = list()
+    for ent in entries:
+        if entry.lower() in ent.lower():
+            matched.append(ent)
+    return render(request,"encyclopedia/substring_results.html",{
+        "matched":matched
+    })
