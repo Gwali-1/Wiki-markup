@@ -6,10 +6,14 @@ from django.urls import reverse
 from . import util
 
 
+
+
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
     })
+
+
 
 def load_page(request,title):
     content = util.get_entry(title)
@@ -25,6 +29,8 @@ def load_page(request,title):
             "error_message":"Page Does Not Exist"
         })
 
+
+
 def search(request):
     entry = request.GET.get("q")
     content = util.get_entry(entry)
@@ -38,6 +44,8 @@ def search(request):
     return render(request,"encyclopedia/substring_results.html",{
         "matched":matched
     })
+
+
 
 def create(request):
     if request.method == "POST":
@@ -55,3 +63,19 @@ def create(request):
       
         return HttpResponse("error")
     return render(request,"encyclopedia/newpage.html")
+
+
+
+def edit(request,title):
+    if request.method == "POST":
+        try:
+            util.save_entry(title,request.POST.get("content"))
+            return HttpResponseRedirect(reverse("encyclopedia:load_page",args=(title,)))
+        except Exception as e:
+             return render(request,"encyclopedia/error_404.html",{
+                    "error_message":e})
+
+    content = util.get_entry(title)
+    return render(request,"encyclopedia/editpage.html",{
+        "content":content
+    })
