@@ -9,4 +9,4 @@ _Markup Language is taken and stored and upon request of the page, it is convert
 
 
 *This is a simple implementation of the logic of taking in markup as input and providing html synthax to be diplayed in browser.This is no leveraging of a 
-database.Entries submitted are saved as files in the "entries" directory which lives in the "encyclopedia" app of this djanfo project
+database.Entries submitted are saved as files in the "entries" directory which lives in the "encyclopedia" app of this django project
