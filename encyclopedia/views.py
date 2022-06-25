@@ -14,8 +14,12 @@ def load_page(request,title):
     content = util.get_entry(title)
     if content:
         content_html = markdown2.markdown(content)
+        return render(request,"encyclopedia/markupContent.html",{
+            "content":content_html,
+            "title":title
+        })
         return HttpResponse(content_html)
     else:
-        return HttpResponse("Page does not exist")
+        return render(request,"encyclopedia/error_404.html")
 
 
